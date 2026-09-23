@@ -22,6 +22,32 @@ namespace game
         {
             return games.GroupBy(x => x.Publisher).ToDictionary(x => x.Key, x => x.Count());
         }
+        public Dictionary<string, int> GenreCount()
+        {
+            return games.GroupBy(x => x.genre).ToDictionary(x => x.Key, x => x.Count());
+        }
+        public Dictionary<string, double> PublisherAvgPrice()
+        {
+            return games.GroupBy(x => x.Publisher).ToDictionary(x => x.Key, x => x.Average(y=> y.price));
+        }
+        public Dictionary<string, double> GenreAvgRating()
+        {
+            return games.GroupBy(x => x.genre).ToDictionary(x => x.Key, x => x.Average(y=>y.rating));
+        }
+        public Dictionary<string, double> PublisherAvgRating()
+        {
+            return games.GroupBy(x => x.Publisher).ToDictionary(x => x.Key, x => x. Max(y => y.rating));
+        }
+        public Dictionary<string, string> MostExpensiveGameByGenre()
+        {
+            return games.GroupBy(x => x.genre).ToDictionary(x => x.Key, x => x.OrderByDescending(y => y.price).Select(y => y.name).First());
+        }
+        public List<string> PublisherMin4()
+        {
+            return games.GroupBy(x => x.Publisher).Where(x => x.Count()>= 4).Select(x=> x.Key).ToList();
+        }
+
+
 
     }
 }
