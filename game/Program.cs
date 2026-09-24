@@ -31,7 +31,10 @@
                 Console.WriteLine($"{item.Key} : {item.Value}");
             }
             Model.PublisherMin4().ForEach(x => Console.WriteLine(x));
-            
+            foreach(KeyValuePair<string, string>item in Model.BestRatingGameByGenre())
+            {
+                Console.WriteLine($"{item.Key} : {item.Value}");
+            }
         }
     }
 }
